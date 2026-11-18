@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Roteiro de reunião · Método ProGrowth</title>
+<style>
+:root {
+  --navy: #12243a;
+  --navy-deep: #0e1c2e;
+  --gold: #c3a368;
+  --gold-ink: #75571e;
+  --ink: #1a2b3d;
+  --muted: #4f5e6d;
+  --line: #dce1e5;
+  --paper: #fff;
+  --canvas: #f3f5f6;
+  --font: Inter, 'Segoe UI', Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--canvas); font: 16px/1.5 var(--font); }
+h1, h2, h3, p, dl, dd { margin: 0; }
+a { color: inherit; }
+button, select, input { font: inherit; }
+button, select, label, input[type=checkbox] { cursor: pointer; }
+:focus-visible { outline: 2px solid #1b6190; outline-offset: 4px; }
+.wrap { max-width: 1140px; margin-inline: auto; padding-inline: 30px; }
+.masthead { color: var(--navy-deep); background: #fff; border-bottom: 1px solid var(--line); }
+.masthead .wrap { min-height: 68px; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.brand { display: inline-flex; gap: 10px; align-items: center; white-space: nowrap; }
+.brand-logo { display: block; position: relative; overflow: hidden; width: 190px; height: 38px; flex: none; }
+.brand-mark { display: block; position: absolute; width: 100%; height: auto; inset-inline-start: 0; top: 50%; transform: translateY(-50%); }
+.brand-name { font-size: 14px; letter-spacing: 0.09em; text-transform: uppercase; }
+.brand-name strong { font-weight: 750; }
+.print-controls { display: flex; align-items: center; gap: 8px; }
+.print-controls[hidden] { display: none; }
+.print-controls select { min-height: 40px; max-width: 100%; color: #fff; background: #1b3048; border: 1px solid #405166; border-radius: 6px; padding: 7px 24px 7px 11px; font-size: 14px; }
+.print-controls button { min-height: 40px; padding: 7px 15px; color: var(--navy-deep); background: #ead6ac; border: 1px solid #ead6ac; border-radius: 6px; font-size: 14px; font-weight: 750; }
+.print-controls button:hover { background: #f7e6c1; }
+.print-controls :focus-visible { outline-color: #f2d9a1; }
+.hero { color: #fff; background: var(--navy); border-bottom: 3px solid var(--gold); }
+.hero .wrap { padding-block: 35px 39px; }
+.hero .kicker { color: #efd8aa; }
+.kicker { font-size: 12px; font-weight: 750; letter-spacing: 0.09em; text-transform: uppercase; }
+.hero h1 { margin: 4px 0 7px; font-size: clamp(34px, 6vw, 58px); line-height: 1.08; font-weight: 760; letter-spacing: -0.045em; }
+.hero p:last-child { color: #e0e7ef; max-width: 60ch; }
+.layout { display: grid; grid-template-columns: 235px minmax(0, 1fr); align-items: start; gap: 24px; padding-block: 28px 36px; }
+.navigation { position: sticky; top: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); padding: 13px 9px; }
+.nav-group + .nav-group { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 12px; }
+.nav-group h2 { margin: 0 10px 5px; color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+.nav-group a { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: baseline; column-gap: 7px; border-radius: 5px; border-inline-start: 3px solid transparent; padding: 8px 8px; text-decoration: none; font-size: 14px; font-weight: 650; }
+.nav-group a:hover { background: #f3f5f8; }
+.nav-group a[aria-current=location] { color: var(--navy-deep); background: #e9eef4; border-inline-start-color: var(--gold-ink); }
+.item-code { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.sheet { padding: 31px 34px 22px; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; }
+.sheet:focus { outline: none; }
+.sheet + .sheet { margin-top: 18px; }
+.sheet[hidden] { display: none; }
+.sheet-heading .kicker { color: var(--gold-ink); }
+.sheet-heading h2 { margin-top: 3px; font-size: clamp(25px, 4vw, 36px); line-height: 1.15; letter-spacing: -0.035em; font-weight: 760; }
+.prepare { margin-top: 18px; padding: 10px 13px; color: var(--muted); background: #f8f5ed; border-inline-start: 3px solid var(--gold); font-size: 14px; }
+.prepare strong { display: block; color: var(--ink); }
+.question-group { margin-top: 20px; }
+.question-group h3, .closing h3 { font-size: 15px; font-weight: 750; }
+.questions { list-style: none; margin: 4px 0 0; padding: 0; }
+.question { display: grid; grid-template-columns: 19px minmax(0, 1fr); gap: 9px; align-items: start; border-bottom: 1px solid var(--line); padding: 10px 0; }
+.question input { width: 15px; height: 15px; margin: 4px 0 0; accent-color: var(--navy); }
+.question label { font-weight: 695; line-height: 1.35; }
+.question p { margin-top: 3px; color: var(--muted); font-size: 14px; line-height: 1.43; }
+.optional h3 { color: var(--gold-ink); }
+.closing { margin-top: 18px; padding: 13px 15px; border: 1px solid #d9e1e9; border-radius: 7px; background: #f2f5f8; }
+.closing p { margin-top: 3px; color: var(--muted); font-size: 13px; }
+.closing dl { margin-top: 6px; display: grid; grid-template-columns: 153px minmax(0, 1fr); gap: 3px 12px; font-size: 13px; }
+.closing dt { font-weight: 710; }
+.closing dd { color: var(--muted); }
+.sheet-footer { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 15px; flex-wrap: wrap; margin-top: 14px; color: var(--muted); font-size: 12px; }
+.sheet-footer a { text-underline-offset: 3px; }
+.paper-brand, .paper-fields, .paper-notes, .paper-only { display: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media screen and (max-width: 780px) {
+  .wrap { padding-inline: 18px; }
+  .hero .wrap { padding-block: 26px 29px; }
+  .layout { grid-template-columns: minmax(0, 1fr); padding-block: 16px 23px; gap: 13px; }
+  .navigation { position: static; }
+  .nav-group { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 5px; }
+  .nav-group h2 { width: 100%; }
+  .nav-group a { grid-template-columns: auto minmax(0, 1fr); }
+  .sheet { padding: 22px 20px 16px; }
+}
+@media screen and (max-width: 460px) {
+  .masthead .wrap { flex-wrap: wrap; gap: 8px; padding-block: 11px; }
+  .brand-logo { width: 122px; height: 28px; }
+  .brand-name { font-size: 12px; }
+  .print-controls button, .print-controls select { min-height: 35px; font-size: 13px; }
+  .closing dl { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .closing dd + dt { margin-top: 5px; }
+}
+@page { size: A4; margin: 11mm 13mm; }
+@media print {
+  :root { --canvas: #fff; }
+  body { color: #18283a; background: #fff; font-size: 10pt; line-height: 1.25; }
+  .masthead, .hero, .navigation, .sheet-footer a { display: none !important; }
+  .wrap, .layout { display: block; max-width: none; margin: 0; padding: 0; }
+  .sheet, .sheet[hidden] { display: block; margin: 0; border: 0; border-radius: 0; padding: 0; }
+  .sheet + .sheet { margin: 0; break-before: page; }
+  body[data-print-scope=principal] .sheet:not(.priority),
+  body[data-print-scope=tema] .sheet:not(.print-topic) { display: none; }
+  body[data-print-scope=tema] .sheet { break-before: auto; }
+  .paper-brand { display: flex; justify-content: space-between; align-items: center; gap: 4mm; color: var(--navy); border-bottom: 1.3pt solid var(--gold-ink); padding-bottom: 2mm; font-size: 9pt; }
+  .brand-logo { width: 45mm; height: 8.2mm; }
+  .brand-name { font-size: 10pt; }
+  .sheet-heading { margin-top: 2.7mm; }
+  .sheet-heading h2 { font-size: 21pt; line-height: 1.1; margin-top: 0.6mm; }
+  .kicker { font-size: 8pt; color: var(--gold-ink); }
+  .paper-fields { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.8mm 5mm; margin: 3mm 0 2mm; color: var(--muted); font-size: 8.25pt; }
+  .paper-fields > div { display: flex; gap: 2mm; align-items: center; }
+  .field-wide { grid-column: 1 / -1; }
+  .write-line { flex: 1; height: 2.5mm; border-bottom: 0.45pt solid #8795a3; }
+  .prepare { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2mm; margin-top: 2.5mm; border-left-width: 1.35pt; padding: 1.4mm 2mm; font-size: 8.7pt; background: #fff; }
+  .question-group { margin-top: 2.4mm; }
+  .question-group h3, .closing h3 { font-size: 9.5pt; }
+  .questions { margin-top: 0.4mm; }
+  .question { grid-template-columns: 3.2mm minmax(0, 1fr); gap: 1.8mm; padding: 1.45mm 0; break-inside: avoid; border-bottom: 0.4pt solid #c1cbd4; }
+  .question input { appearance: none; width: 2.7mm; height: 2.7mm; margin: 0.55mm 0 0; border: 0.6pt solid #5a6b7a; border-radius: 0.3mm; }
+  .question input:checked { background: #354f6a; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .question label { font-size: 10.25pt; line-height: 1.22; }
+  .question p { margin-top: 0.45mm; font-size: 8.95pt; line-height: 1.24; }
+  .closing { margin-top: 2.5mm; padding: 1.8mm 2mm; border: 0.55pt solid #aab9c6; border-radius: 0; background: #fff; break-inside: avoid; }
+  .closing p { margin-top: 0.55mm; font-size: 8.6pt; }
+  .closing dl { grid-template-columns: 34mm minmax(0, 1fr); gap: 0.6mm 2mm; margin-top: 1mm; font-size: 8.6pt; }
+  .paper-notes { display: block; margin-top: 3mm; color: var(--muted); font-size: 8.6pt; break-inside: avoid; }
+  .paper-notes > div { height: 4.3mm; border-bottom: 0.45pt solid #bbc6d0; }
+  .sheet-footer { margin-top: 2mm; font-size: 8pt; break-inside: avoid; }
+  .paper-only { display: inline; }
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span>
+    <div class="print-controls" id="print-controls" hidden>
+      <label class="sr-only" for="print-scope">Quais perguntas imprimir</label>
+      <select id="print-scope">
+        <option value="principal">Pauta principal</option>
+        <option value="tema">Tema aberto</option>
+        <option value="completo">Guia completo</option>
+      </select>
+      <button type="button" id="print-button">Imprimir</button>
+    </div>
+  </div>
+</header>
+<div class="hero"><div class="wrap">
+  <p class="kicker">Método ProGrowth</p>
+  <h1>Roteiro de reunião</h1>
+  <p>Perguntas para levantar os dados e fechar as decisões de cada tema.</p>
+</div></div>
+<div class="wrap layout">
+  <nav class="navigation" aria-label="Temas da reunião">
+    <div class="nav-group"><h2>Pauta principal</h2>
+    <a href="#icp" data-topic-link>
+      <span class="item-code">1.1</span><span>Perfil de cliente ideal</span>
+    </a>
+    <a href="#metas" data-topic-link>
+      <span class="item-code">3.1</span><span>Metas comerciais</span>
+    </a>
+    <a href="#indicadores" data-topic-link>
+      <span class="item-code">3.2</span><span>Indicadores (KPIs)</span>
+    </a></div>
+    <div class="nav-group"><h2>Se o tema entrar na conversa</h2>
+    <a href="#aquisicao" data-topic-link>
+      <span class="item-code">1.2</span><span>Canais de aquisição</span>
+    </a>
+    <a href="#carteira" data-topic-link>
+      <span class="item-code">1.3</span><span>Trabalho da carteira</span>
+    </a>
+    <a href="#parceiros" data-topic-link>
+      <span class="item-code">1.6</span><span>Canais e parceiros</span>
+    </a></div>
+  </nav>
+  <main aria-label="Perguntas por tema">
+    <section class="sheet priority" id="icp" data-topic tabindex="-1" aria-labelledby="icp-title">
+    <div class="paper-brand"><span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span><span>Roteiro de reunião · Método ProGrowth</span></div>
+    <div class="sheet-heading">
+      <p class="kicker">Pilar 1 · Variáveis de Crescimento</p>
+      <h2 id="icp-title">Perfil de Cliente Ideal (ICP)</h2>
+    </div>
+    <div class="paper-fields" aria-hidden="true">
+      <div><span>Empresa</span><span class="write-line"></span></div>
+      <div><span>Data</span><span class="write-line"></span></div>
+      <div><span>Responsável no cliente e cargo</span><span class="write-line"></span></div>
+      <div><span>Período de referência</span><span class="write-line"></span></div>
+      <div class="field-wide"><span>Reuniões, datas e materiais usados</span><span class="write-line"></span></div>
+    </div>
+    <p class="prepare"><strong>Tenha à mão</strong> Abra a base de clientes com valor comprado, recorrência e tempo de relacionamento.</p>
+    
+    <div class="question-group">
+      <h3>Perguntas principais</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="icp-0-0" aria-describedby="icp-0-0-detail">
+            <div>
+              <label for="icp-0-0">Me mostra três bons clientes. O que eles têm em comum e por que vocês querem vender para mais empresas assim?</label>
+              <p id="icp-0-0-detail">Traga três evidências da base. Para cada uma, registre o que ela mostra, de onde veio e de que período é.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="icp-0-1" aria-describedby="icp-0-1-detail">
+            <div>
+              <label for="icp-0-1">Se eu fosse prospectar amanhã, que empresas eu colocaria na lista?</label>
+              <p id="icp-0-1-detail">Por segmento: atividade, porte ou número de funcionários, faixa de faturamento mensal ou anual e região.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="icp-0-2" aria-describedby="icp-0-2-detail">
+            <div>
+              <label for="icp-0-2">Em que momento esse cliente procura vocês? Por que escolhe vocês e quanto compra?</label>
+              <p id="icp-0-2-detail">Confirme o momento da compra, o ticket ideal, a chance de voltar a comprar e o que mais pode comprar.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="icp-0-3" aria-describedby="icp-0-3-detail">
+            <div>
+              <label for="icp-0-3">Quem decide, quem influencia e quem usa? O que pesa e como eu falo com cada um?</label>
+              <p id="icp-0-3-detail">Confirme os cargos, quem assina ou aprova, o critério de cada pessoa e a abordagem para chegar até ela.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="icp-0-4" aria-describedby="icp-0-4-detail">
+            <div>
+              <label for="icp-0-4">O que o SDR precisa confirmar para priorizar um lead? O que faz baixar a prioridade ou descartar?</label>
+              <p id="icp-0-4-detail">Defina os critérios de segmento, porte ou faturamento, momento, acesso ao decisor e postura. Qual perfil merece P1 imediato, P2 reunião prioritária, P3 nutrição ou P4 reavaliação?</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="icp-0-5" aria-describedby="icp-0-5-detail">
+            <div>
+              <label for="icp-0-5">Se houver mais de um segmento, qual a gente trabalha primeiro? Por quê?</label>
+              <p id="icp-0-5-detail">Com o patrocinador, dê notas de 1 a 5 para urgência, objeção, ticket, recorrência, facilidade de venda e escala. Nota maior em objeção significa menos resistência. Confirme a ordem e o segmento de aquisição e o de recorrência.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="question-group optional">
+      <h3>Para aprofundar o perfil</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="icp-1-0" aria-describedby="icp-1-0-detail">
+            <div>
+              <label for="icp-1-0">O cliente já percebeu o problema? O que tentou antes e o que faz ele agir agora?</label>
+              <p id="icp-1-0-detail">Registre a dor, o resultado que ele quer, o gatilho e as tentativas anteriores. Repita por segmento quando mudar.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="icp-1-1" aria-describedby="icp-1-1-detail">
+            <div>
+              <label for="icp-1-1">Quais objeções aparecem? O que gera confiança, o que faz desconfiar e que palavras funcionam?</label>
+              <p id="icp-1-1-detail">Peça exemplos de abordagem e palavras a evitar. Para a persona do decisor, use nome fictício, cargo, contexto, dor, desejo, objeção e o que destrava a compra.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="closing">
+      <h3>Antes de mudar de assunto</h3>
+      <p>Confirme a fonte dos números e registre como “A definir” o que estiver pendente.</p>
+      <dl>
+        <dt>Decisões e pendências</dt><dd>O que ficou decidido? O que falta definir, quem decide e o que fica travado?</dd>
+        <dt>Combinados</dt><dd>O que vai ser feito, por quê, como, por quem e até quando?</dd>
+        <dt>Aprovação</dt><dd>Quem aprova, em que data e por qual registro? Quando o documento será revisto?</dd>
+      </dl>
+    </div>
+    <div class="paper-notes" aria-hidden="true"><strong>Anotações</strong><div></div><div></div><div></div><div></div><div></div></div>
+    <footer class="sheet-footer">
+      <span>Modelo MOD-IT-1.1 · v1.1</span>
+      <span class="paper-only">Grupo Focco · Uso interno</span>
+    </footer>
+  </section>
+<section class="sheet priority" id="metas" data-topic tabindex="-1" aria-labelledby="metas-title">
+    <div class="paper-brand"><span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span><span>Roteiro de reunião · Método ProGrowth</span></div>
+    <div class="sheet-heading">
+      <p class="kicker">Pilar 3 · Gestão</p>
+      <h2 id="metas-title">Metas Comerciais</h2>
+    </div>
+    <div class="paper-fields" aria-hidden="true">
+      <div><span>Empresa</span><span class="write-line"></span></div>
+      <div><span>Data</span><span class="write-line"></span></div>
+      <div><span>Responsável no cliente e cargo</span><span class="write-line"></span></div>
+      <div><span>Período de referência</span><span class="write-line"></span></div>
+      <div class="field-wide"><span>Reuniões, datas e materiais usados</span><span class="write-line"></span></div>
+    </div>
+    <p class="prepare"><strong>Tenha à mão</strong> Tenha à mão o histórico de vendas, o processo comercial e a aba Funil invertido do Kit de Planilhas.</p>
+    
+    <div class="question-group">
+      <h3>Perguntas principais</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="metas-0-0" aria-describedby="metas-0-0-detail">
+            <div>
+              <label for="metas-0-0">Qual é a meta de receita que a diretoria assume para este mês? O que conta como receita?</label>
+              <p id="metas-0-0-detail">Confirme o valor, o mês e se o número é contratado, faturado ou recebido. Se houver mais de uma meta, registre o valor e o período de cada uma.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="metas-0-1" aria-describedby="metas-0-1-detail">
+            <div>
+              <label for="metas-0-1">Qual é o ticket médio real que vamos usar? De onde vem esse número e quantos dias úteis o time tem?</label>
+              <p id="metas-0-1-detail">Use o histórico de vendas como referência e confirme o calendário do período. Se o ticket muda muito por produto ou canal, combine a premissa.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="metas-0-2" aria-describedby="metas-0-2-detail">
+            <div>
+              <label for="metas-0-2">De cada 100, quantos avançam em cada etapa hoje? Me mostra de onde veio a taxa.</label>
+              <p id="metas-0-2-detail">Lead qualificado → agendamento → reunião realizada → proposta apresentada → venda. Confirme a taxa de cada passagem. Se for estimada, quem revisa após quatro semanas de dados no CRM?</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="metas-0-3" aria-describedby="metas-0-3-detail">
+            <div>
+              <label for="metas-0-3">Para bater a meta, quantas vendas precisamos fechar? Voltando no funil, o que isso exige em cada etapa?</label>
+              <p id="metas-0-3-detail">Feche o volume mensal, semanal e diário de vendas, propostas apresentadas, reuniões realizadas, reuniões agendadas e leads qualificados.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="metas-0-4" aria-describedby="metas-0-4-detail">
+            <div>
+              <label for="metas-0-4">O time que temos hoje consegue entregar esse volume? Onde vai travar?</label>
+              <p id="metas-0-4-detail">Compare o volume exigido com a capacidade real. Se houver diferença, confirme o que precisa mudar na equipe, no processo ou nas taxas.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="metas-0-5" aria-describedby="metas-0-5-detail">
+            <div>
+              <label for="metas-0-5">Qual número fica na mão de cada pessoa ou função, e qual fica com a equipe?</label>
+              <p id="metas-0-5-detail">Defina o indicador e as metas diária, semanal, mensal e trimestral para SDR, consultor e equipe, conforme o papel de cada um.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="metas-0-6" aria-describedby="metas-0-6-detail">
+            <div>
+              <label for="metas-0-6">Onde essa meta vai aparecer e quem atualiza? Quando a gente vai olhar meta versus realizado?</label>
+              <p id="metas-0-6-detail">Confirme painel diário, reunião semanal, reunião mensal e frequência dos 1:1. Defina quem atualiza e quem conduz cada acompanhamento.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="closing">
+      <h3>Antes de mudar de assunto</h3>
+      <p>Confirme a fonte dos números e registre como “A definir” o que estiver pendente.</p>
+      <dl>
+        <dt>Decisões e pendências</dt><dd>O que ficou decidido? O que falta definir, quem decide e o que fica travado?</dd>
+        <dt>Combinados</dt><dd>O que vai ser feito, por quê, como, por quem e até quando?</dd>
+        <dt>Aprovação</dt><dd>Quem aprova, em que data e por qual registro? Quando o documento será revisto?</dd>
+      </dl>
+    </div>
+    <div class="paper-notes" aria-hidden="true"><strong>Anotações</strong><div></div><div></div><div></div><div></div><div></div></div>
+    <footer class="sheet-footer">
+      <span>Modelo MOD-IT-3.1 · v1.1</span>
+      <span class="paper-only">Grupo Focco · Uso interno</span>
+    </footer>
+  </section>
+<section class="sheet priority" id="indicadores" data-topic tabindex="-1" aria-labelledby="indicadores-title">
+    <div class="paper-brand"><span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span><span>Roteiro de reunião · Método ProGrowth</span></div>
+    <div class="sheet-heading">
+      <p class="kicker">Pilar 3 · Gestão</p>
+      <h2 id="indicadores-title">Matriz de Indicadores (KPIs)</h2>
+    </div>
+    <div class="paper-fields" aria-hidden="true">
+      <div><span>Empresa</span><span class="write-line"></span></div>
+      <div><span>Data</span><span class="write-line"></span></div>
+      <div><span>Responsável no cliente e cargo</span><span class="write-line"></span></div>
+      <div><span>Período de referência</span><span class="write-line"></span></div>
+      <div class="field-wide"><span>Reuniões, datas e materiais usados</span><span class="write-line"></span></div>
+    </div>
+    <p class="prepare"><strong>Tenha à mão</strong> Abra o CRM e as abas KPIs e Painel semanal do Kit de Planilhas. Combine o período de referência.</p>
+    
+    <div class="question-group">
+      <h3>Perguntas principais</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="indicadores-0-0" aria-describedby="indicadores-0-0-detail">
+            <div>
+              <label for="indicadores-0-0">O que o profissional tem que registrar todo dia para eu saber se o funil está andando?</label>
+              <p id="indicadores-0-0-detail">Tentativas de contato, conexões efetivas, reuniões agendadas, reuniões realizadas e propostas apresentadas. Confirme quando cada evento passa a contar.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="indicadores-0-1" aria-describedby="indicadores-0-1-detail">
+            <div>
+              <label for="indicadores-0-1">O que vamos medir de resultado toda semana e todo mês?</label>
+              <p id="indicadores-0-1-detail">Conversão por etapa, ticket médio, ciclo de venda, receita gerada, taxa de recompra e motivos de perda. Confirme o que entra em cada medida.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="indicadores-0-2" aria-describedby="indicadores-0-2-detail">
+            <div>
+              <label for="indicadores-0-2">Como se calcula cada indicador? Dá para mostrar com um caso real?</label>
+              <p id="indicadores-0-2-detail">Confirme base e denominador de cada taxa, início e fim do ciclo, unidade e período. Combine como tratar duplicidades, remarcações e cancelamentos.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="indicadores-0-3" aria-describedby="indicadores-0-3-detail">
+            <div>
+              <label for="indicadores-0-3">De onde eu tiro esse número? Quem lança e quem confere?</label>
+              <p id="indicadores-0-3-detail">Para cada indicador, anote sistema, campo ou relatório, responsável e referência de comparação. Se ainda não for medido, combine como obter a primeira leitura.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="indicadores-0-4" aria-describedby="indicadores-0-4-detail">
+            <div>
+              <label for="indicadores-0-4">Quais números a equipe precisa enxergar no painel? Qual é a meta de cada um no período?</label>
+              <p id="indicadores-0-4-detail">Defina o que entra, a meta, o local do painel, quem atualiza e a frequência de atualização.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="indicadores-0-5" aria-describedby="indicadores-0-5-detail">
+            <div>
+              <label for="indicadores-0-5">Qual faixa acende o verde, qual acende o amarelo e quando o gestor tem que agir?</label>
+              <p id="indicadores-0-5-detail">Confirme os limites. O modelo usa verde a partir de 100%, amarelo de 80% a menos de 100% e vermelho abaixo de 80%, salvo regra da diretoria.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="closing">
+      <h3>Antes de mudar de assunto</h3>
+      <p>Confirme a fonte dos números e registre como “A definir” o que estiver pendente.</p>
+      <dl>
+        <dt>Decisões e pendências</dt><dd>O que ficou decidido? O que falta definir, quem decide e o que fica travado?</dd>
+        <dt>Combinados</dt><dd>O que vai ser feito, por quê, como, por quem e até quando?</dd>
+        <dt>Aprovação</dt><dd>Quem aprova, em que data e por qual registro? Quando o documento será revisto?</dd>
+      </dl>
+    </div>
+    <div class="paper-notes" aria-hidden="true"><strong>Anotações</strong><div></div><div></div><div></div><div></div><div></div></div>
+    <footer class="sheet-footer">
+      <span>Modelo MOD-IT-3.2 · v1.1</span>
+      <span class="paper-only">Grupo Focco · Uso interno</span>
+    </footer>
+  </section>
+<section class="sheet" id="aquisicao" data-topic tabindex="-1" aria-labelledby="aquisicao-title">
+    <div class="paper-brand"><span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span><span>Roteiro de reunião · Método ProGrowth</span></div>
+    <div class="sheet-heading">
+      <p class="kicker">Pilar 1 · Variáveis de Crescimento</p>
+      <h2 id="aquisicao-title">Canais de Aquisição</h2>
+    </div>
+    <div class="paper-fields" aria-hidden="true">
+      <div><span>Empresa</span><span class="write-line"></span></div>
+      <div><span>Data</span><span class="write-line"></span></div>
+      <div><span>Responsável no cliente e cargo</span><span class="write-line"></span></div>
+      <div><span>Período de referência</span><span class="write-line"></span></div>
+      <div class="field-wide"><span>Reuniões, datas e materiais usados</span><span class="write-line"></span></div>
+    </div>
+    <p class="prepare"><strong>Tenha à mão</strong> Abra o relatório de leads e vendas por origem, com o mês e a fonte de cada número.</p>
+    
+    <div class="question-group">
+      <h3>Perguntas principais</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="aquisicao-0-0" aria-describedby="aquisicao-0-0-detail">
+            <div>
+              <label for="aquisicao-0-0">De onde vieram as oportunidades e as vendas deste mês? Me mostra por canal.</label>
+              <p id="aquisicao-0-0-detail">Passe por indicação, tráfego pago, lista fria, base de clientes, parceiros, eventos e networking. Anote leads por mês, vendas por mês e a fonte. Use “Não medido” quando faltar medição.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="aquisicao-0-1" aria-describedby="aquisicao-0-1-detail">
+            <div>
+              <label for="aquisicao-0-1">Quais canais geram venda de verdade? Quanto custa fechar uma venda em cada um?</label>
+              <p id="aquisicao-0-1-detail">Confirme investimento, conversão em venda e custo por venda no mesmo período. Se houver volume sem qualidade, peça exemplos.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="aquisicao-0-2" aria-describedby="aquisicao-0-2-detail">
+            <div>
+              <label for="aquisicao-0-2">O que a gente opera agora, o que entra depois e o que fica de fora? Por quê?</label>
+              <p id="aquisicao-0-2-detail">Considere também reativação de inativos e prospects que não fecharam. Confirme a ordem e o motivo de cada decisão.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="aquisicao-0-3" aria-describedby="aquisicao-0-3-detail">
+            <div>
+              <label for="aquisicao-0-3">Para cada canal escolhido, quem assume, quando começa e quantos leads por mês tem que gerar?</label>
+              <p id="aquisicao-0-3-detail">Confirme a data de início e qual processo, roteiro ou funil orienta o trabalho de cada canal.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="aquisicao-0-4" aria-describedby="aquisicao-0-4-detail">
+            <div>
+              <label for="aquisicao-0-4">Quando o lead entra no CRM, qual tag de origem recebe e quem garante o registro?</label>
+              <p id="aquisicao-0-4-detail">Combine a regra de origem para o lead e para a venda, inclusive quando a oportunidade passar por mais de um canal.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="aquisicao-0-5" aria-describedby="aquisicao-0-5-detail">
+            <div>
+              <label for="aquisicao-0-5">Qual número vai dizer se vale manter o canal? Quem lê e de quanto em quanto tempo?</label>
+              <p id="aquisicao-0-5-detail">Combine o indicador que fecha o ciclo, a pessoa responsável pela leitura e a frequência. Use a conversão e o custo por venda como referências quando medidos.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="closing">
+      <h3>Antes de mudar de assunto</h3>
+      <p>Confirme a fonte dos números e registre como “A definir” o que estiver pendente.</p>
+      <dl>
+        <dt>Decisões e pendências</dt><dd>O que ficou decidido? O que falta definir, quem decide e o que fica travado?</dd>
+        <dt>Combinados</dt><dd>O que vai ser feito, por quê, como, por quem e até quando?</dd>
+        <dt>Aprovação</dt><dd>Quem aprova, em que data e por qual registro? Quando o documento será revisto?</dd>
+      </dl>
+    </div>
+    <div class="paper-notes" aria-hidden="true"><strong>Anotações</strong><div></div><div></div><div></div><div></div><div></div></div>
+    <footer class="sheet-footer">
+      <span>Modelo MOD-IT-1.2 · v1.1</span>
+      <span class="paper-only">Grupo Focco · Uso interno</span>
+    </footer>
+  </section>
+<section class="sheet" id="carteira" data-topic tabindex="-1" aria-labelledby="carteira-title">
+    <div class="paper-brand"><span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span><span>Roteiro de reunião · Método ProGrowth</span></div>
+    <div class="sheet-heading">
+      <p class="kicker">Pilar 1 · Variáveis de Crescimento</p>
+      <h2 id="carteira-title">Plano de Trabalho da Carteira</h2>
+    </div>
+    <div class="paper-fields" aria-hidden="true">
+      <div><span>Empresa</span><span class="write-line"></span></div>
+      <div><span>Data</span><span class="write-line"></span></div>
+      <div><span>Responsável no cliente e cargo</span><span class="write-line"></span></div>
+      <div><span>Período de referência</span><span class="write-line"></span></div>
+      <div class="field-wide"><span>Reuniões, datas e materiais usados</span><span class="write-line"></span></div>
+    </div>
+    <p class="prepare"><strong>Tenha à mão</strong> Peça a exportação da base com data de referência, histórico de compras e responsáveis. Abra a aba Carteira ABC.</p>
+    
+    <div class="question-group">
+      <h3>Perguntas principais</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="carteira-0-0" aria-describedby="carteira-0-0-detail">
+            <div>
+              <label for="carteira-0-0">Me mostra a carteira de hoje. Quem são os clientes, quanto compraram e quando foi a última compra?</label>
+              <p id="carteira-0-0-detail">Use CRM, ERP ou planilha para confirmar o período da exportação, o valor por cliente e quem responde pela conta.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="carteira-0-1" aria-describedby="carteira-0-1-detail">
+            <div>
+              <label for="carteira-0-1">Onde está concentrado o valor? Quais contas estão em risco e onde dá para vender de novo?</label>
+              <p id="carteira-0-1-detail">Apure o total e, por grupo A, B, C e inativos, a quantidade de clientes e o valor dos últimos 12 meses. Confirme a participação de A, B e C no valor.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="carteira-0-2" aria-describedby="carteira-0-2-detail">
+            <div>
+              <label for="carteira-0-2">Qual é a regra para um cliente entrar em A, B ou C? Depois de quanto tempo sem comprar vira inativo?</label>
+              <p id="carteira-0-2-detail">Confirme os cortes com o patrocinador. Se usarem faturamento acumulado, feche os percentuais. Ajuste a inatividade ao ciclo real de recompra.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="carteira-0-3" aria-describedby="carteira-0-3-detail">
+            <div>
+              <label for="carteira-0-3">Quem fala com cada grupo, por qual canal, de quanto em quanto tempo e para quê?</label>
+              <p id="carteira-0-3-detail">Repita para A, B, C e inativos. Defina o objetivo de cada contato: relacionamento, recompra, expansão ou reativação.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="carteira-0-4" aria-describedby="carteira-0-4-detail">
+            <div>
+              <label for="carteira-0-4">Em qual funil a gente trabalha a carteira e em qual reativa os inativos? Quais são as etapas de cada um?</label>
+              <p id="carteira-0-4-detail">Confirme onde entram as oportunidades de recompra, expansão e relacionamento e as oportunidades de reativação.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="carteira-0-5" aria-describedby="carteira-0-5-detail">
+            <div>
+              <label for="carteira-0-5">Quem atualiza a base, quem revê os donos das contas e quando a gente confere o resultado?</label>
+              <p id="carteira-0-5-detail">Defina a data ou frequência de recategorização e redistribuição. Confirme quem lê reativação e expansão na reunião mensal.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="closing">
+      <h3>Antes de mudar de assunto</h3>
+      <p>Confirme a fonte dos números e registre como “A definir” o que estiver pendente.</p>
+      <dl>
+        <dt>Decisões e pendências</dt><dd>O que ficou decidido? O que falta definir, quem decide e o que fica travado?</dd>
+        <dt>Combinados</dt><dd>O que vai ser feito, por quê, como, por quem e até quando?</dd>
+        <dt>Aprovação</dt><dd>Quem aprova, em que data e por qual registro? Quando o documento será revisto?</dd>
+      </dl>
+    </div>
+    <div class="paper-notes" aria-hidden="true"><strong>Anotações</strong><div></div><div></div><div></div><div></div><div></div></div>
+    <footer class="sheet-footer">
+      <span>Modelo MOD-IT-1.3 · v1.1</span>
+      <span class="paper-only">Grupo Focco · Uso interno</span>
+    </footer>
+  </section>
+<section class="sheet" id="parceiros" data-topic tabindex="-1" aria-labelledby="parceiros-title">
+    <div class="paper-brand"><span class="brand brand-logo"><img class="brand-mark" alt="Grupo Focco" src="./grupo-focco-logo.png"></span><span>Roteiro de reunião · Método ProGrowth</span></div>
+    <div class="sheet-heading">
+      <p class="kicker">Pilar 1 · Variáveis de Crescimento</p>
+      <h2 id="parceiros-title">Categorização de Canais e Parceiros</h2>
+    </div>
+    <div class="paper-fields" aria-hidden="true">
+      <div><span>Empresa</span><span class="write-line"></span></div>
+      <div><span>Data</span><span class="write-line"></span></div>
+      <div><span>Responsável no cliente e cargo</span><span class="write-line"></span></div>
+      <div><span>Período de referência</span><span class="write-line"></span></div>
+      <div class="field-wide"><span>Reuniões, datas e materiais usados</span><span class="write-line"></span></div>
+    </div>
+    <p class="prepare"><strong>Tenha à mão</strong> Abra a lista de parceiros e os registros de indicação e venda do período escolhido.</p>
+    
+    <div class="question-group">
+      <h3>Perguntas principais</h3>
+      <ul class="questions">
+        <li class="question">
+            <input type="checkbox" id="parceiros-0-0" aria-describedby="parceiros-0-0-detail">
+            <div>
+              <label for="parceiros-0-0">Vocês vendem por parceiros? Quais são, de que tipo e quem cuida de cada um?</label>
+              <p id="parceiros-0-0-detail">Confirme o nome, tipo e responsável por parceiro ou canal indireto. Se o canal indireto não se aplicar, confirme o motivo.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="parceiros-0-1" aria-describedby="parceiros-0-1-detail">
+            <div>
+              <label for="parceiros-0-1">Nesse período, quantas indicações e quantas vendas vieram de cada parceiro?</label>
+              <p id="parceiros-0-1-detail">Use o mesmo intervalo para todos. Confirme o relatório que comprova os números e como a venda é atribuída ao parceiro.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="parceiros-0-2" aria-describedby="parceiros-0-2-detail">
+            <div>
+              <label for="parceiros-0-2">O que pesa mais para a gente priorizar um parceiro? Como mede cada coisa?</label>
+              <p id="parceiros-0-2-detail">Combine a medida e o peso de volume gerado, conversão, potencial e aderência ao ICP.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="parceiros-0-3" aria-describedby="parceiros-0-3-detail">
+            <div>
+              <label for="parceiros-0-3">Quem entra em A, B ou C? Qual é o corte e quantos parceiros ficam em cada grupo?</label>
+              <p id="parceiros-0-3-detail">Confirme os critérios de entrada e a quantidade de parceiros em cada categoria.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="parceiros-0-4" aria-describedby="parceiros-0-4-detail">
+            <div>
+              <label for="parceiros-0-4">O que cada categoria recebe, qual condição comercial vale e quem mantém o contato?</label>
+              <p id="parceiros-0-4-detail">Para A, B e C, defina nível de atendimento, condição comercial, intervalo de contato e responsável.</p>
+            </div>
+          </li><li class="question">
+            <input type="checkbox" id="parceiros-0-5" aria-describedby="parceiros-0-5-detail">
+            <div>
+              <label for="parceiros-0-5">De quanto em quanto tempo a gente revê a categoria? Quem traz os números para a reunião mensal?</label>
+              <p id="parceiros-0-5-detail">Combine a periodicidade, o período dos números e o responsável por trazer evidências e validar as mudanças.</p>
+            </div>
+          </li>
+      </ul>
+    </div>
+    <div class="closing">
+      <h3>Antes de mudar de assunto</h3>
+      <p>Confirme a fonte dos números e registre como “A definir” o que estiver pendente.</p>
+      <dl>
+        <dt>Decisões e pendências</dt><dd>O que ficou decidido? O que falta definir, quem decide e o que fica travado?</dd>
+        <dt>Combinados</dt><dd>O que vai ser feito, por quê, como, por quem e até quando?</dd>
+        <dt>Aprovação</dt><dd>Quem aprova, em que data e por qual registro? Quando o documento será revisto?</dd>
+      </dl>
+    </div>
+    <div class="paper-notes" aria-hidden="true"><strong>Anotações</strong><div></div><div></div><div></div><div></div><div></div></div>
+    <footer class="sheet-footer">
+      <span>Modelo MOD-IT-1.6 · v1.1</span>
+      <span class="paper-only">Grupo Focco · Uso interno</span>
+    </footer>
+  </section>
+  </main>
+</div>
+<script>
+const sheets = [...document.querySelectorAll('[data-topic]')];
+const topicLinks = [...document.querySelectorAll('[data-topic-link]')];
+const printControls = document.getElementById('print-controls');
+const printScope = document.getElementById('print-scope');
+const printButton = document.getElementById('print-button');
+
+function showTopic() {
+  const active = sheets.find(sheet => '#' + sheet.id === location.hash) ?? sheets[0];
+  for (const sheet of sheets) sheet.hidden = sheet !== active;
+  for (const link of topicLinks) {
+    if (link.hash === '#' + active.id) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+  return active;
+}
+
+for (const link of topicLinks) {
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+    const active = showTopic();
+    active.focus({ preventScroll: true });
+    if (matchMedia('(max-width: 780px)').matches) active.scrollIntoView({ block: 'start' });
+  });
+}
+
+addEventListener('hashchange', showTopic);
+addEventListener('popstate', showTopic);
+
+printButton.addEventListener('click', () => {
+  const active = showTopic();
+  active.classList.add('print-topic');
+  document.body.dataset.printScope = printScope.value;
+  window.print();
+});
+
+addEventListener('afterprint', () => {
+  delete document.body.dataset.printScope;
+  for (const sheet of sheets) sheet.classList.remove('print-topic');
+});
+
+showTopic();
+printControls.hidden = false;
+</script>
+</body>
+</html>
